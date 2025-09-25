@@ -1,0 +1,245 @@
+{% load static %}     <!--导入static文件夹中的静态资源-->
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>清华大学|{% block title %}{% endblock %} </title>          <!--模板内容第一处==>嵌入动态标题声明标签-->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">           <!--引入静态文件-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!--背景星空样式-->
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <style>
+        body {
+
+          background: radial-gradient(200% 100% at bottom center, rgba(247, 247, 182, 0.6), #e96f92, #75517d, #1b2947);
+          background: radial-gradient(220% 105% at top center, #1b2947 10%, #75517d 40%, #e96f92 65%, #f7f7b6);
+          background-attachment: fixed;
+          overflow-y: scroll;
+          /* height: 500vh; /* 设置页面高度为视口高度 */ */
+        }
+
+
+        @keyframes rotate {
+          0% {
+            transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+          }
+          100% {
+            transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(-360deg);
+          }
+        }
+        .stars {
+          transform: perspective(500px);
+          transform-style: preserve-3d;
+          position: fixed;
+          bottom: 0;
+          perspective-origin: 50% 100%;
+          left: 50%;
+          animation: rotate 90s infinite linear;
+        }
+
+        .star {
+          width: 2px;
+          height: 2px;
+          background: #F7F7B6;
+          position: fixed;
+          top: 0;
+          left: 0;
+          transform-origin: 0 0 -300px;
+          transform: translate3d(0, 0, -300px);
+          backface-visibility: hidden;
+        }
+
+        </style>
+    <!--上面背景-->
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="container top">
+        <div class="row">
+            <div class="col-md-6">
+                <a>
+                    <img class="img-responsive" src="{% static 'img/logoTS.jpg' %}" style="with:180px;height:60px;">
+                </a>
+            </div>
+            <div class="col-md-3 hidden-xs">   <!--hidden-xs样式表示小屏幕下该部分内容不显示-->
+                <a class="phone ant">
+                    <span class="glyphicon glyphicon-phone"></span>电话：010-62793001 &nbsp; &nbsp;
+                </a>
+            </div>
+            <div class="col-md-3 hidden-xs">
+                <a class="mail ant">
+                    <span class="glyphicon glyphicon-envelope"></span>邮箱：webmaster@tsinghua.edu.cn
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 导航条 -->
+    <nav class="navbar navbar-default" role="navigation">  <!--定义一个导航栏，使用Bootstrap的默认样式。-->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example"
+                    aria-expanded="false">
+                    <span>导航栏</span>
+                </button>   <!--定义一个按钮，用于在小屏幕设备上显示和隐藏导航栏。-->
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example">  <!--定义一个折叠区域，用于存放导航链接。-->
+                <ul class="nav navbar-nav" style="width:100%;">
+                    <li class="nav-top">
+                        <a href="{% url 'home' %}">首页</a>
+                    </li>
+                    <li class="dropdown nav-top" id='about'>  <!--定义一个下拉菜单列表项-->
+                        <a href="#" class="dropdown-toggle on" data-toggle="dropdown">  <!--点击显示菜单内容-->
+                            学校概况</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'aboutApp:survey' %}">校庆献辞</a></li>   <!--通过反向解析定位实现跳转-->
+                            <li><a href="{% url 'aboutApp:honor' %}">学校沿革</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown nav-top" id='news'>
+                        <a href="#" class="dropdown-toggle on" data-toggle="dropdown">
+                            清华新闻</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'newsApp:news' 'company' %}">综合时讯</a></li>
+                            <li><a href="{% url 'newsApp:news' 'industry' %}">交流合作</a></li>
+                            <li><a href="{% url 'newsApp:news' 'notice' %}">最新动态</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-top" id='products'>
+                        <a href="#" class="dropdown-toggle on" data-toggle="dropdown">
+                            学校建筑</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'productsApp:products' 'robot' %}">
+                                    艺术博物馆</a></li>
+                            <li><a href="{% url 'productsApp:products' 'monitor' %}">
+                                    科学博物馆</a></li>
+                            <li><a href="{% url 'productsApp:products' 'face' %}">
+                                    新清华学堂</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-top">
+                        <a href="#" class="dropdown-toggle on" data-toggle="dropdown">
+                            科研研究</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'serviceApp:download' %}">
+                                    学术交流</a></li>
+                            <li><a href="{% url 'serviceApp:platform' %}">
+                                    人脸识别开放平台</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-top" id='science'>
+                        <a href="{% url 'scienceApp:science' %}">招生就业</a>
+                    </li>
+                    <li class="dropdown nav-top" id='employ'>
+                        <a href="#" class="dropdown-toggle on" data-toggle="dropdown">
+                            走进清华</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'contactApp:contact' %}">实用信息</a></li>
+                            <li><a href="{% url 'contactApp:recruit' %}">师资招聘</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- 分割线 -->
+    <div class="line"></div>    <!--传入子模块信息内容-->
+    {% block content %}        <!--模板内容第二处==>嵌入动态内容声明标签-->
+    {% endblock %}
+    <!-- 页脚 -->
+    <div class="container web-footer">
+        <!-- 站点地图 -->
+        <div class="row" id="map-footer">
+            <div class="col-md-2">
+                <dl>                            <!--dl表示表格，dt表示表格标题，dd表示表格内容-->
+                    <dt>学校概况</dt>
+                    <dd><a href="{% url 'aboutApp:survey' %}">校庆献辞</a></dd>
+                    <dd><a href="{% url 'aboutApp:honor' %}">学校沿革</a></dd>
+                </dl>
+            </div>
+            <div class="col-md-2">
+                <dl>
+                    <dt>学校建筑</dt>
+                    <dd><a href="{% url 'productsApp:products' 'robot' %}">艺术博物馆</a></dd>
+                    <dd><a href="{% url 'productsApp:products' 'monitor' %}">科学博物馆</a></dd>
+                    <dd><a href="{% url 'productsApp:products' 'face' %}">新清华学堂</a></dd>
+                </dl>
+            </div>
+            <div class="col-md-2">
+                <dl>
+                    <dt>科研研究</dt>
+                    <dd><a href="{% url 'serviceApp:download' %}">学术交流</a></dd>
+                    <dd><a href="{% url 'serviceApp:platform' %}">人脸识别开放平台</a></dd>
+                </dl>
+            </div>
+            <div class="col-md-2">
+                <dl>
+                    <dt>走进清华</dt>
+                    <dd><a href="{% url 'contactApp:contact' %}">实用信息</a></dd>
+                    <dd><a href="{% url 'contactApp:recruit' %}">师资招聘</a></dd>
+                </dl>
+            </div>
+            <div class="col-md-4" id="wx">
+                <p>扫描二维码，关注我们</p>
+                <img class="qrimg" src="{% static 'img/qr.png' %}" alt="wx">
+                <p>客服热线：<b style="font-size:20px">010-62793001</b></p>
+            </div>
+        </div>
+        <!-- 版权 -->
+        <div class="row" id="patent-footer">
+            <p>版权所有 © 清华大学 京ICP备15006448号 京公网安备 110402430053 号 </p>
+        </div>
+    </div>
+
+<!--    实现光标移动到一级菜单上自动展开，移出则自动折叠-->
+    <script>
+        $(function () {
+            $(".dropdown").mouseover(function () {
+                $(this).addClass("open");
+            });
+            $(".dropdown").mouseleave(function () {
+                $(this).removeClass("open");
+            });
+        });
+    </script>
+    <script type="text/JavaScript">
+        $('#{{active_menu}}').addClass("active");
+    </script>
+    <script type="text/JavaScript">
+        $('#{{sub_menu}}').addClass("active");
+     </script>
+
+    <!--新加背景-->
+    <div class="stars"></div>  <!--背景层，不要删除，不然没有作用-->
+
+    <script>
+    $(document).ready(function(){
+      var stars=1000;  /*星星的密集程度，数字越大越多*/
+      var $stars=$(".stars");
+      var r=800;   /*星星的看起来的距离,值越大越远,可自行调制到自己满意的样子*/
+      for(var i=0;i<stars;i++){
+        var $star=$("<div/>").addClass("star");
+        $stars.append($star);
+      }
+      $(".star").each(function(){
+        var cur=$(this);
+        var s=0.2+(Math.random()*1);
+        var curR=r+(Math.random()*300);
+        cur.css({
+          transformOrigin:"0 0 "+curR+"px",
+          transform:" translate3d(0,0,-"+curR+"px) rotateY("+(Math.random()*360)+"deg) rotateX("+(Math.random()*-50)+"deg) scale("+s+","+s+")"
+
+        })
+      })
+    })
+    </script>
+
+</body>
+</html>
