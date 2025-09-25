@@ -1,5 +1,3 @@
-## 项目说明（hengDaProject）
-
 本项目是一个基于 Django 2.2.4 仿制清华大学官网，包含“首页、公司简介（或学校简介）、新闻动态、产品中心、服务支持、科研基地、人才招聘”等模块。项目内置后台管理（SimpleUI 美化）、富文本编辑（DjangoUeditor）、全文检索（Haystack + Whoosh）、资料下载、简历投递与邮件通知、OpenCV 人脸检测等功能。
 
 ---
@@ -100,4 +98,5 @@ website-of-Tsinghua@README.md/
 5. 访问：
    - 前台：`http://127.0.0.1:8000/`
    - 后台：`http://127.0.0.1:8000/admin/`
+
 
